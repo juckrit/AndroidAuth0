@@ -50,7 +50,7 @@ android {
         buildConfig = true
     }
     publishing {
-        singleVariant("release") {
+        singleVariant("debug") {
             withSourcesJar()
             withJavadocJar()
         }
