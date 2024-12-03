@@ -50,6 +50,25 @@ android {
         buildConfig = true
     }
 }
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("androidAuth0") {
+                from(components["release"])
+                groupId = "com.github.juckrit"
+                artifactId = "androidauth0"
+                version = "0.8.0"
+            }
+        }
+
+        repositories {
+            mavenCentral()
+        }
+    }
+
+}
+
+
 
 dependencies {
     implementation(libs.auth0)
