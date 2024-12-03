@@ -3,13 +3,14 @@ package com.kingpowerclick.android.auth0
 import android.content.Context
 import android.content.pm.PackageManager
 import com.auth0.android.Auth0
-import com.auth0.android.auth0.BuildConfig
 import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
 import com.auth0.android.provider.CustomTabsOptions
 import com.auth0.android.provider.WebAuthProvider
 
-class AuthenticationManager constructor(context: Context) {
+class AuthenticationManager constructor(
+    private val context: Context,
+) {
     private val clientId = getMetadataValue("Auth0ClientId", context)
     private val domain = getMetadataValue("Auth0Domain", context)
     private val audience = getMetadataValue("Auth0Audience", context)
@@ -21,19 +22,22 @@ class AuthenticationManager constructor(context: Context) {
             domain = domain!!,
         )
 
-    fun getMetadataValue(key: String, context: Context): String? {
-        return try {
-            val applicationInfo = context.packageManager.getApplicationInfo(
-                context.packageName,
-                PackageManager.GET_META_DATA
-            )
+    fun getMetadataValue(
+        key: String,
+        context: Context,
+    ): String? =
+        try {
+            val applicationInfo =
+                context.packageManager.getApplicationInfo(
+                    context.packageName,
+                    PackageManager.GET_META_DATA,
+                )
             val metaData = applicationInfo.metaData
             metaData?.getString(key) // Get the value by key
         } catch (e: PackageManager.NameNotFoundException) {
             e.printStackTrace()
             null
         }
-    }
 
     suspend fun logIn(
         context: Context,

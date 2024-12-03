@@ -17,6 +17,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        
+
         manifestPlaceholders["Auth0ClientId"] =  "YGI5QlEhzwm73vWEAVk8jig8okiHX4DN" // <- important backslash!!!
         manifestPlaceholders["Auth0Scheme"] =  "https" // <- important backslash!!!
         manifestPlaceholders["Auth0Domain"] =  "kingpower-dev.au.auth0.com" // <- important backslash!!!
