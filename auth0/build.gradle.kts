@@ -29,7 +29,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro",
@@ -54,7 +54,7 @@ afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("androidAuth0") {
-                from(components["release"])
+                from(components["debug"])
                 groupId = "com.github.juckrit"
                 artifactId = "androidauth0"
                 version = "0.8.0"
