@@ -28,7 +28,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="${Auth0ClientId}"
+                    android:host="${Auth0Domain}"
                     android:pathPrefix="/android/${applicationId}/callback"
                     android:scheme="${Auth0Scheme}" />
             </intent-filter>
