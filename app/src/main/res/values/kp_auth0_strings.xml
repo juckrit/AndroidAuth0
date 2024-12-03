@@ -1,0 +1,7 @@
+<resources>
+    <string name="kp_auth0_scheme" translatable="false">https</string>
+    <string name="kp_auth0_client_id" translatable="false">x2Jt9CMuKlqyPGM7DkypN8BhNno6uEii</string>
+    <string name="kp_auth0_domain" translatable="false">kingpower-dev.au.auth0.com</string>
+    <string name="kp_auth0_audience" translatable="false">https://www.kingpower.com/</string>
+    <string name="kp_auth0_scope" translatable="false">openid profile email offline_access</string>
+</resources>

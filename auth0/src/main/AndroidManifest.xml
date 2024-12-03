@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
+    <application>
+        <meta-data android:name="Auth0ClientId" android:value="${Auth0ClientId}" />
+        <meta-data android:name="Auth0Scheme" android:value="${Auth0Scheme}" />
+        <meta-data android:name="Auth0Domain" android:value="${Auth0Domain}" />
+        <meta-data android:name="Auth0Scope" android:value="${Auth0Scope}" />
+        <meta-data android:name="Auth0Audience" android:value="${Auth0Audience}" />
+        <activity
+            android:name="com.auth0.android.provider.AuthenticationActivity"
+            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"
+            android:exported="false"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            tools:node="replace" />
+        <activity
+            android:name="com.auth0.android.provider.RedirectActivity"
+            android:exported="true"
+            tools:node="replace">
+            <intent-filter
+                android:autoVerify="true"
+                tools:targetApi="m">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="${Auth0ClientId}"
+                    android:pathPrefix="/android/${applicationId}/callback"
+                    android:scheme="${Auth0Scheme}" />
+            </intent-filter>
+        </activity>
+    </application>
 </manifest>

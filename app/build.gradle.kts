@@ -6,16 +6,22 @@ plugins {
 
 android {
     namespace = "com.kingpowerclick.auth0"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.kingpowerclick.auth0"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders["Auth0ClientId"] =  "YGI5QlEhzwm73vWEAVk8jig8okiHX4DN" // <- important backslash!!!
+        manifestPlaceholders["Auth0Scheme"] =  "https" // <- important backslash!!!
+        manifestPlaceholders["Auth0Domain"] =  "kingpower-dev.au.auth0.com" // <- important backslash!!!
+        manifestPlaceholders["Auth0Scope"] =  "openid profile email offline_access" // <- important backslash!!!
+        manifestPlaceholders["Auth0Audience"] =  "https://www.firster.com/" // <- important backslash!!!
     }
 
     buildTypes {
@@ -40,6 +46,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":auth0"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
