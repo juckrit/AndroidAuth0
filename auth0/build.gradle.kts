@@ -49,12 +49,6 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    publishing {
-        singleVariant("debug") {
-            withSourcesJar()
-            withJavadocJar()
-        }
-    }
 }
 
 dependencies {
