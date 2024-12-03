@@ -7,7 +7,14 @@ plugins {
 android {
     namespace = "com.kingpowerclick.auth0"
     compileSdk = 35
-
+    testFixtures {
+        enable = true
+    }
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+        }
+    }
     defaultConfig {
         applicationId = "com.kingpowerclick.auth0"
         minSdk = 24
