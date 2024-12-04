@@ -26,11 +26,11 @@ android {
 
         
 
-        manifestPlaceholders["auth0ClientId"] =  "x2Jt9CMuKlqyPGM7DkypN8BhNno6uEii" // <- important backslash!!!
-        manifestPlaceholders["auth0Scheme"] =  "https" // <- important backslash!!!
-        manifestPlaceholders["auth0Domain"] =  "dev.onepass.kpc-dev.com" // <- important backslash!!!
-        manifestPlaceholders["auth0Scope"] =  "openid profile email offline_access" // <- important backslash!!!
-        manifestPlaceholders["auth0Audience"] =  "https://www.kingpower.com/" // <- important backslash!!!
+        manifestPlaceholders["auth0ClientId"] =  "x2Jt9CMuKlqyPGM7DkypN8BhNno6uEii"
+        manifestPlaceholders["auth0Scheme"] =  "https"
+        manifestPlaceholders["auth0Domain"] =  "dev.onepass.kpc-dev.com"
+        manifestPlaceholders["auth0Scope"] =  "openid profile email offline_access"
+        manifestPlaceholders["auth0Audience"] =  "https://www.kingpower.com/" 
 
         
     }
