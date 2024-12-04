@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
     <application>
-        <meta-data android:name="Auth0ClientId" android:value="${Auth0ClientId}" />
-        <meta-data android:name="Auth0Scheme" android:value="${Auth0Scheme}" />
-        <meta-data android:name="Auth0Domain" android:value="${Auth0Domain}" />
-        <meta-data android:name="Auth0Scope" android:value="${Auth0Scope}" />
-        <meta-data android:name="Auth0Audience" android:value="${Auth0Audience}" />
+<!--        <meta-data android:name="auth0ClientId" android:value="${auth0ClientId}" />-->
+<!--        <meta-data android:name="auth0Scheme" android:value="https" />-->
+<!--        <meta-data android:name="auth0Domain" android:value="kingpower-dev.au.auth0.com" />-->
+<!--        <meta-data android:name="auth0Scope" android:value="${auth0Scope}" />-->
+<!--        <meta-data android:name="auth0Audience" android:value="${auth0Audience}" />-->
         <activity
             android:name="com.auth0.android.provider.AuthenticationActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"
@@ -20,17 +20,16 @@
             android:exported="true"
             tools:node="replace">
             <intent-filter
-                android:autoVerify="true"
-                tools:targetApi="m">
+                android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="${Auth0Domain}"
-                    android:pathPrefix="/android/${applicationId}/callback"
-                    android:scheme="${Auth0Scheme}" />
+                    android:host="dev.onepass.kpc-dev.com"
+                    android:pathPrefix="/android/com.kingpower.dev/callback"
+                    android:scheme="https" />
             </intent-filter>
         </activity>
     </application>

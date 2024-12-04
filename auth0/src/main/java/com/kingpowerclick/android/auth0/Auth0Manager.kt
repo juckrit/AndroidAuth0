@@ -5,21 +5,24 @@ import android.content.pm.PackageManager
 import com.auth0.android.Auth0
 import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
+import com.auth0.android.callback.Callback
 import com.auth0.android.provider.CustomTabsOptions
 import com.auth0.android.provider.WebAuthProvider
+import com.auth0.android.result.Credentials
 
 class AuthenticationManager constructor(
     private val context: Context,
 ) {
-    private val clientId = getMetadataValue("Auth0ClientId", context)
-    private val domain = getMetadataValue("Auth0Domain", context)
-    private val audience = getMetadataValue("Auth0Audience", context)
-    private val scope = getMetadataValue("Auth0Scope", context)
+    private val clientId = getMetadataValue("auth0ClientId", context)
+    private val domain = getMetadataValue("auth0Domain", context)
+    private val audience = getMetadataValue("auth0Audience", context)
+    private val scope = getMetadataValue("auth0Scope", context)
+    private val scheme = getMetadataValue("auth0Scheme", context)
 
     private val account =
         Auth0(
-            clientId = clientId!!,
-            domain = domain!!,
+            clientId = "x2Jt9CMuKlqyPGM7DkypN8BhNno6uEii",
+            domain = "dev.onepass.kpc-dev.com",
         )
 
     fun getMetadataValue(
@@ -45,18 +48,20 @@ class AuthenticationManager constructor(
         onFail: suspend (error: ErrorModel) -> Unit,
     ) {
         try {
-            val credentials =
-                WebAuthProvider
-                    .login(account)
-                    .withAudience(audience!!)
-                    .withScope(scope!!)
-                    .withCustomTabsOptions(
-                        options =
-                            CustomTabsOptions
-                                .newBuilder()
-                                .showTitle(true)
-                                .build(),
-                    ).await(context)
+            val credentials = WebAuthProvider
+                .login(account)
+                .withParameters(
+                    mapOf("organization" to "kp")
+                )
+                .withScheme("https")
+                .withAudience("https://www.kingpower.com/")
+                .withScope("openid profile email offline_access")
+                .withCustomTabsOptions(
+                    options = CustomTabsOptions
+                        .newBuilder()
+                        .showTitle(true)
+                        .build()
+                ).await(context)
             onSuccess(
                 CredentialsModel(
                     idToken = credentials.idToken,
@@ -64,14 +69,14 @@ class AuthenticationManager constructor(
                     type = credentials.type,
                     refreshToken = credentials.refreshToken,
                     expiresAt = credentials.expiresAt,
-                    scope = credentials.scope,
-                ),
+                    scope = credentials.scope
+                )
             )
         } catch (error: AuthenticationException) {
             onFail(
                 ErrorModel(
-                    statusCode = error.statusCode,
-                ),
+                    statusCode = error.statusCode
+                )
             )
         }
     }

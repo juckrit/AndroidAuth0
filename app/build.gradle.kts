@@ -16,7 +16,7 @@ android {
         }
     }
     defaultConfig {
-        applicationId = "com.kingpowerclick.auth0"
+        applicationId = "com.kingpower.dev"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
@@ -26,11 +26,14 @@ android {
 
         
 
-        manifestPlaceholders["Auth0ClientId"] =  "YGI5QlEhzwm73vWEAVk8jig8okiHX4DN" // <- important backslash!!!
-        manifestPlaceholders["Auth0Scheme"] =  "https" // <- important backslash!!!
-        manifestPlaceholders["Auth0Domain"] =  "kingpower-dev.au.auth0.com" // <- important backslash!!!
-        manifestPlaceholders["Auth0Scope"] =  "openid profile email offline_access" // <- important backslash!!!
-        manifestPlaceholders["Auth0Audience"] =  "https://www.firster.com/" // <- important backslash!!!
+//        manifestPlaceholders["auth0ClientId"] =  "YGI5QlEhzwm73vWEAVk8jig8okiHX4DN" // <- important backslash!!!
+//        manifestPlaceholders["auth0Scheme"] =  "https" // <- important backslash!!!
+//        manifestPlaceholders["auth0Domain"] =  "kingpower-dev.au.auth0.com" // <- important backslash!!!
+//        manifestPlaceholders["auth0Scope"] =  "openid profile email offline_access" // <- important backslash!!!
+////        manifestPlaceholders["auth0Audience"] =  "https://www.firster.com/" // <- important backslash!!!
+//        manifestPlaceholders["auth0Audience"] =  "https://www.kingpower.com/" // <- important backslash!!!
+
+        
     }
 
     buildTypes {

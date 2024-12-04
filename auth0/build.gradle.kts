@@ -14,17 +14,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
 
-        manifestPlaceholders["Auth0ClientId"] = "\${Auth0ClientId}" // <- important backslash!!!
-        manifestPlaceholders["Auth0Scheme"] = "\${Auth0Scheme}" // <- important backslash!!!
-        manifestPlaceholders["Auth0Domain"] = "\${Auth0Domain}" // <- important backslash!!!
-        manifestPlaceholders["Auth0Scope"] = "\${Auth0Scope}" // <- important backslash!!!
-        manifestPlaceholders["Auth0Audience"] = "\${Auth0Audience}" // <- important backslash!!!
-
-//        buildConfigField("String", "Auth0ClientId", "$a")
-//        buildConfigField("String", "Auth0Scheme", "$a")
-//        buildConfigField("String", "Auth0Domain", "$a}")
-//        buildConfigField("String", "Auth0Scope", "$a")
-//        buildConfigField("String", "Auth0Audience", "$a")
+//        manifestPlaceholders["auth0ClientId"] = "\${auth0ClientId}" // <- important backslash!!!
+//        manifestPlaceholders["auth0Scheme"] = "\${auth0Scheme}" // <- important backslash!!!
+//        manifestPlaceholders["auth0Domain"] = "\${auth0Domain}" // <- important backslash!!!
+//        manifestPlaceholders["auth0Scope"] = "\${auth0Scope}" // <- important backslash!!!
+//        manifestPlaceholders["auth0Audience"] = "\${auth0Audience}" // <- important backslash!!!
     }
 
     buildTypes {
