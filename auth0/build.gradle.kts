@@ -19,6 +19,7 @@ android {
         manifestPlaceholders["auth0Domain"] = "\${auth0Domain}" // <- important backslash!!!
         manifestPlaceholders["auth0Scope"] = "\${auth0Scope}" // <- important backslash!!!
         manifestPlaceholders["auth0Audience"] = "\${auth0Audience}" // <- important backslash!!!
+        manifestPlaceholders["auth0Organization"] = "\${auth0Organization}" // <- important backslash!!!
     }
 
     buildTypes {

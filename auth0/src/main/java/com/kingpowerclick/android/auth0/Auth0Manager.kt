@@ -18,6 +18,7 @@ class AuthenticationManager constructor(
     private val audience = getMetadataValue("auth0Audience", context)
     private val scope = getMetadataValue("auth0Scope", context)
     private val scheme = getMetadataValue("auth0Scheme", context)
+    private val organization = getMetadataValue("auth0Organization", context)
 
     private val account =
         Auth0(
@@ -51,7 +52,7 @@ class AuthenticationManager constructor(
             val credentials = WebAuthProvider
                 .login(account)
                 .withParameters(
-                    mapOf("organization" to "kp")
+                    mapOf("organization" to organization)
                 )
                 .withScheme(scheme!!)
                 .withAudience(audience!!)

@@ -8,6 +8,7 @@
         <meta-data android:name="auth0Domain" android:value="${auth0Domain}" />
         <meta-data android:name="auth0Scope" android:value="${auth0Scope}" />
         <meta-data android:name="auth0Audience" android:value="${auth0Audience}" />
+        <meta-data android:name="auth0Organization" android:value="${auth0Organization}" />
         <activity
             android:name="com.auth0.android.provider.AuthenticationActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"
