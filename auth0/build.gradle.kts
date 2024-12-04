@@ -14,11 +14,11 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
 
-//        manifestPlaceholders["auth0ClientId"] = "\${auth0ClientId}" // <- important backslash!!!
-//        manifestPlaceholders["auth0Scheme"] = "\${auth0Scheme}" // <- important backslash!!!
-//        manifestPlaceholders["auth0Domain"] = "\${auth0Domain}" // <- important backslash!!!
-//        manifestPlaceholders["auth0Scope"] = "\${auth0Scope}" // <- important backslash!!!
-//        manifestPlaceholders["auth0Audience"] = "\${auth0Audience}" // <- important backslash!!!
+        manifestPlaceholders["auth0ClientId"] = "\${auth0ClientId}" // <- important backslash!!!
+        manifestPlaceholders["auth0Scheme"] = "\${auth0Scheme}" // <- important backslash!!!
+        manifestPlaceholders["auth0Domain"] = "\${auth0Domain}" // <- important backslash!!!
+        manifestPlaceholders["auth0Scope"] = "\${auth0Scope}" // <- important backslash!!!
+        manifestPlaceholders["auth0Audience"] = "\${auth0Audience}" // <- important backslash!!!
     }
 
     buildTypes {

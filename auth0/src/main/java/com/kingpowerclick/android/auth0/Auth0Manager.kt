@@ -21,8 +21,8 @@ class AuthenticationManager constructor(
 
     private val account =
         Auth0(
-            clientId = "x2Jt9CMuKlqyPGM7DkypN8BhNno6uEii",
-            domain = "dev.onepass.kpc-dev.com",
+            clientId = clientId!!,
+            domain = domain!!,
         )
 
     fun getMetadataValue(
@@ -53,9 +53,9 @@ class AuthenticationManager constructor(
                 .withParameters(
                     mapOf("organization" to "kp")
                 )
-                .withScheme("https")
-                .withAudience("https://www.kingpower.com/")
-                .withScope("openid profile email offline_access")
+                .withScheme(scheme!!)
+                .withAudience(audience!!)
+                .withScope(scope!!)
                 .withCustomTabsOptions(
                     options = CustomTabsOptions
                         .newBuilder()

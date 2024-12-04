@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
     <uses-permission android:name="android.permission.INTERNET" />
     <application>
-<!--        <meta-data android:name="auth0ClientId" android:value="${auth0ClientId}" />-->
-<!--        <meta-data android:name="auth0Scheme" android:value="https" />-->
-<!--        <meta-data android:name="auth0Domain" android:value="kingpower-dev.au.auth0.com" />-->
-<!--        <meta-data android:name="auth0Scope" android:value="${auth0Scope}" />-->
-<!--        <meta-data android:name="auth0Audience" android:value="${auth0Audience}" />-->
+        <meta-data android:name="auth0ClientId" android:value="${auth0ClientId}" />
+        <meta-data android:name="auth0Scheme" android:value="${auth0Scheme}" />
+        <meta-data android:name="auth0Domain" android:value="${auth0Domain}" />
+        <meta-data android:name="auth0Scope" android:value="${auth0Scope}" />
+        <meta-data android:name="auth0Audience" android:value="${auth0Audience}" />
         <activity
             android:name="com.auth0.android.provider.AuthenticationActivity"
             android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation|keyboard|keyboardHidden"
@@ -27,9 +27,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:host="dev.onepass.kpc-dev.com"
-                    android:pathPrefix="/android/com.kingpower.dev/callback"
-                    android:scheme="https" />
+                    android:host="${auth0Domain}"
+                    android:pathPrefix="/android/${applicationId}/callback"
+                    android:scheme="${auth0Scheme}" />
             </intent-filter>
         </activity>
     </application>
