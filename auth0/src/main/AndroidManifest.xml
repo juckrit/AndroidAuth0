@@ -26,6 +26,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
+<!--                must set applicationId in app build.gradle to be the same as auth0 console callback-->
+<!--                it will not look up whatever you hardcode pathPrefix ${applicationId} here-->
                 <data
                     android:host="${auth0Domain}"
                     android:pathPrefix="/android/${applicationId}/callback"
