@@ -10,7 +10,11 @@ android {
 
     defaultConfig {
         minSdk = 24
-
+        publishing {
+            multipleVariants {
+                withSourcesJar()
+            }
+        }
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
 
