@@ -10,11 +10,6 @@ android {
     testFixtures {
         enable = true
     }
-    publishing {
-        singleVariant("release") {
-            withSourcesJar()
-        }
-    }
     defaultConfig {
         applicationId = "com.kingpower.dev"
         minSdk = 24
