@@ -24,13 +24,22 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-//        manifestPlaceholders["auth0ClientId"] = "YGI5QlEhzwm73vWEAVk8jig8okiHX4DN" // firster
-        manifestPlaceholders["auth0ClientId"] = "x2Jt9CMuKlqyPGM7DkypN8BhNno6uEii" //kp
+        // Kingpower dev
+//        manifestPlaceholders["auth0ClientId"] = "x2Jt9CMuKlqyPGM7DkypN8BhNno6uEii"
+//        manifestPlaceholders["auth0Scheme"] = "https"
+//        manifestPlaceholders["auth0Domain"] = "dev.onepass.kpc-dev.com"
+//        manifestPlaceholders["auth0Scope"] = "openid profile email offline_access"
+//        manifestPlaceholders["auth0Audience"] = "https://www.kingpower.com/"
+//        applicationId = "com.kingpower.dev"
+
+        // Firster dev
+        manifestPlaceholders["auth0ClientId"] = "YGI5QlEhzwm73vWEAVk8jig8okiHX4DN" // firster
         manifestPlaceholders["auth0Scheme"] = "https"
         manifestPlaceholders["auth0Domain"] = "dev.onepass.kpc-dev.com"
         manifestPlaceholders["auth0Scope"] = "openid profile email offline_access"
-        manifestPlaceholders["auth0Audience"] = "https://www.kingpower.com/"
-        manifestPlaceholders["auth0Organization"] = "kp"
+        manifestPlaceholders["auth0Audience"] = "f1_api"
+        manifestPlaceholders["auth0Organization"] = "f1"
+        applicationId = "com.kpc.hisdev"
     }
 
     buildTypes {
