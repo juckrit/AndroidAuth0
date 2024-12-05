@@ -78,6 +78,7 @@ class MainActivity : ComponentActivity() {
                                     authenticationManager.logOut(
                                         context = this@MainActivity,
                                         onSuccess = {
+                                            refreshToken = ""
                                             val a = 1
                                         },
                                         onFail = {},
