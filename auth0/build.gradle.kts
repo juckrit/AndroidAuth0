@@ -15,7 +15,6 @@ android {
                 withSourcesJar()
             }
         }
-        setPublishNonDefault(true)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
 
@@ -54,7 +53,7 @@ afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("androidAuth0") {
-                from(components["debug"])
+                from(components["release"])
                 groupId = "com.github.juckrit"
                 artifactId = "androidauth0"
             }
