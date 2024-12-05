@@ -49,10 +49,8 @@ afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("androidAuth0") {
-                from(components["debug"])
                 groupId = "com.github.juckrit"
                 artifactId = "androidauth0"
-                version = "0.9.0"
             }
         }
 
