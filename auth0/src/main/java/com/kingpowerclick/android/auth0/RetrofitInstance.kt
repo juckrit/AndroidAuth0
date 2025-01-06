@@ -1,22 +1,24 @@
 package com.kingpowerclick.android.auth0
 
+import android.content.Context
+import com.kingpowerclick.android.auth0.Util.getMetadataValue
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitInstance {
-    private const val BASE_URL = "https://dev.onepass.kpc-dev.com/"
-
-    fun getInstance(): Retrofit {
+    fun getInstance(context: Context): Retrofit {
+        val scheme = getMetadataValue("auth0Scheme", context)
+        val domain = getMetadataValue("auth0Domain", context)
+        val baseUrl = "$scheme://$domain"
         val client = OkHttpClient()
         val clientBuilder: OkHttpClient.Builder =
             client.newBuilder().addInterceptor(createInterceptor())
 
         return Retrofit
             .Builder()
-            .baseUrl(BASE_URL)
+            .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .client(clientBuilder.build())
             .build()

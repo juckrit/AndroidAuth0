@@ -6,11 +6,9 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
@@ -28,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.kingpowerclick.android.auth0.AuthenticationManager
 import com.kingpowerclick.android.auth0.CredentialsModel
 import com.kingpowerclick.auth0.ui.theme.Auth0Theme
@@ -54,8 +51,9 @@ class MainActivity : ComponentActivity() {
             Auth0Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Column(
-                        modifier = Modifier
-                            .verticalScroll(rememberScrollState())
+                        modifier =
+                            Modifier
+                                .verticalScroll(rememberScrollState()),
                     ) {
                         Greeting(
                             modifier = Modifier.padding(innerPadding),
@@ -78,7 +76,12 @@ class MainActivity : ComponentActivity() {
                                             refreshToken = result.refreshToken!!
                                         },
                                         onFail = {
-                                            Toast.makeText(this@MainActivity,"logIn Failed",Toast.LENGTH_SHORT).show()
+                                            Toast
+                                                .makeText(
+                                                    this@MainActivity,
+                                                    "logIn Failed",
+                                                    Toast.LENGTH_SHORT,
+                                                ).show()
                                         },
                                     )
                                 }
@@ -106,7 +109,12 @@ class MainActivity : ComponentActivity() {
                                             val a = 1
                                         },
                                         onFail = {
-                                            Toast.makeText(this@MainActivity,"logOut Failed",Toast.LENGTH_SHORT).show()
+                                            Toast
+                                                .makeText(
+                                                    this@MainActivity,
+                                                    "logOut Failed",
+                                                    Toast.LENGTH_SHORT,
+                                                ).show()
                                         },
                                     )
                                 }
@@ -133,7 +141,12 @@ class MainActivity : ComponentActivity() {
                                             accessToken = credentials.accessToken!!
                                         },
                                         onFail = {
-                                            Toast.makeText(this@MainActivity,"refreshToken Failed",Toast.LENGTH_SHORT).show()
+                                            Toast
+                                                .makeText(
+                                                    this@MainActivity,
+                                                    "refreshToken Failed",
+                                                    Toast.LENGTH_SHORT,
+                                                ).show()
                                         },
                                     )
                                 }
@@ -157,6 +170,7 @@ class MainActivity : ComponentActivity() {
                                 CoroutineScope(Dispatchers.IO).launch {
                                     val result =
                                         authenticationManager.refreshTokenBySynchronous(
+                                            context = this@MainActivity,
                                             clientId =
                                                 authenticationManager
                                                     .getClientId()

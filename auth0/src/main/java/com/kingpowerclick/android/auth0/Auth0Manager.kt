@@ -7,6 +7,7 @@ import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
 import com.auth0.android.provider.CustomTabsOptions
 import com.auth0.android.provider.WebAuthProvider
+import com.kingpowerclick.android.auth0.Util.getMetadataValue
 import java.util.Date
 
 class AuthenticationManager constructor(
@@ -23,23 +24,6 @@ class AuthenticationManager constructor(
         Auth0.getInstance(clientId!!, domain!!)
 
     fun getClientId() = clientId
-
-    fun getMetadataValue(
-        key: String,
-        context: Context,
-    ): String? =
-        try {
-            val applicationInfo =
-                context.packageManager.getApplicationInfo(
-                    context.packageName,
-                    PackageManager.GET_META_DATA,
-                )
-            val metaData = applicationInfo.metaData
-            metaData?.getString(key) // Get the value by key
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-            null
-        }
 
     suspend fun logIn(
         context: Context,
@@ -140,12 +124,13 @@ class AuthenticationManager constructor(
         but return refreshToken that pass as param
      */
     fun refreshTokenBySynchronous(
+        context: Context,
         clientId: String,
         refreshToken: String,
     ): CredentialsModel? {
         val response =
             RetrofitInstance
-                .getInstance()
+                .getInstance(context)
                 .create(Auth0ApiInterface::class.java)
                 .refreshToken(
                     RefreshTokenBody(
