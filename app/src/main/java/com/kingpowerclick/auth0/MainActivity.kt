@@ -60,7 +60,10 @@ class MainActivity : ComponentActivity() {
                         )
                         Button(
                             shape = RectangleShape,
-                            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(),
                             onClick = {
                                 scope.launch {
                                     authenticationManager.logIn(
@@ -99,7 +102,10 @@ class MainActivity : ComponentActivity() {
                         )
                         Button(
                             shape = RectangleShape,
-                            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(),
                             onClick = {
                                 scope.launch {
                                     authenticationManager.logOut(
@@ -132,7 +138,10 @@ class MainActivity : ComponentActivity() {
                         )
                         Button(
                             shape = RectangleShape,
-                            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(),
                             onClick = {
                                 scope.launch {
                                     authenticationManager.refreshToken(
@@ -165,7 +174,10 @@ class MainActivity : ComponentActivity() {
                         )
                         Button(
                             shape = RectangleShape,
-                            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(),
                             onClick = {
                                 CoroutineScope(Dispatchers.IO).launch {
                                     val result =
@@ -187,6 +199,29 @@ class MainActivity : ComponentActivity() {
                                             "Login to enable refreshToken synchronous"
                                         } else {
                                             "accessToken = $accessToken"
+                                        },
+                                )
+                            },
+                            enabled = accessToken.isEmpty().not(),
+                        )
+                        Button(
+                            shape = RectangleShape,
+                            modifier =
+                                Modifier
+                                    .fillMaxWidth()
+                                    .wrapContentHeight(),
+                            onClick = {
+                                authenticationManager.openCamPage(
+                                    this@MainActivity,
+                                )
+                            },
+                            content = {
+                                Text(
+                                    text =
+                                        if (accessToken.isBlank()) {
+                                            "Login to enable openCamPage"
+                                        } else {
+                                            "openCamPage"
                                         },
                                 )
                             },

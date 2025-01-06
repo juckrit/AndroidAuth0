@@ -2,6 +2,9 @@ package com.kingpowerclick.android.auth0
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
+import android.net.Uri
+import androidx.browser.customtabs.CustomTabsIntent
 import com.auth0.android.Auth0
 import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
@@ -156,5 +159,18 @@ class AuthenticationManager constructor(
         } else {
             null
         }
+    }
+
+    fun openCamPage(
+        context: Context,
+        url:String = "https://dev-cam.onepass.kpc-dev.com/api/auth/login"
+    ) {
+        val PACKAGE_CHROME = "com.android.chrome"
+        val customTabsIntent =
+            CustomTabsIntent
+                .Builder()
+                .build()
+        customTabsIntent.intent.setPackage(PACKAGE_CHROME)
+        customTabsIntent.launchUrl(context, Uri.parse(url))
     }
 }

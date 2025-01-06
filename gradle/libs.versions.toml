@@ -12,6 +12,7 @@ appcompat = "1.7.0"
 material = "1.12.0"
 auth0Version = "3.2.1"
 retrofitVersion = "2.11.0"
+browserVersion = "1.8.0"
 
 
 [libraries]
@@ -34,6 +35,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 auth0 = { group = "com.auth0.android", name = "auth0", version.ref = "auth0Version" }
 retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofitVersion" }
 retrofitConverterGson = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofitVersion" }
+browser = { group = "androidx.browser", name = "browser", version.ref = "browserVersion" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
