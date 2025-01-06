@@ -5,10 +5,8 @@ import android.content.pm.PackageManager
 import com.auth0.android.Auth0
 import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
-import com.auth0.android.callback.Callback
 import com.auth0.android.provider.CustomTabsOptions
 import com.auth0.android.provider.WebAuthProvider
-import com.auth0.android.result.Credentials
 
 class AuthenticationManager constructor(
     private val context: Context,
@@ -21,10 +19,7 @@ class AuthenticationManager constructor(
     private val organization = getMetadataValue("auth0Organization", context)
 
     private val account =
-        Auth0(
-            clientId = clientId!!,
-            domain = domain!!,
-        )
+        Auth0.getInstance(clientId!!, domain!!)
 
     fun getMetadataValue(
         key: String,
@@ -49,20 +44,21 @@ class AuthenticationManager constructor(
         onFail: suspend (error: ErrorModel) -> Unit,
     ) {
         try {
-            val credentials = WebAuthProvider
-                .login(account)
-                .withParameters(
-                    mapOf("organization" to organization)
-                )
-                .withScheme(scheme!!)
-                .withAudience(audience!!)
-                .withScope(scope!!)
-                .withCustomTabsOptions(
-                    options = CustomTabsOptions
-                        .newBuilder()
-                        .showTitle(true)
-                        .build()
-                ).await(context)
+            val credentials =
+                WebAuthProvider
+                    .login(account)
+                    .withParameters(
+                        mapOf("organization" to organization),
+                    ).withScheme(scheme!!)
+                    .withAudience(audience!!)
+                    .withScope(scope!!)
+                    .withCustomTabsOptions(
+                        options =
+                            CustomTabsOptions
+                                .newBuilder()
+                                .showTitle(true)
+                                .build(),
+                    ).await(context)
             onSuccess(
                 CredentialsModel(
                     idToken = credentials.idToken,
@@ -70,14 +66,14 @@ class AuthenticationManager constructor(
                     type = credentials.type,
                     refreshToken = credentials.refreshToken,
                     expiresAt = credentials.expiresAt,
-                    scope = credentials.scope
-                )
+                    scope = credentials.scope,
+                ),
             )
         } catch (error: AuthenticationException) {
             onFail(
                 ErrorModel(
-                    statusCode = error.statusCode
-                )
+                    statusCode = error.statusCode,
+                ),
             )
         }
     }

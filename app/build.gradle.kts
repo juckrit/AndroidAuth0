@@ -11,7 +11,6 @@ android {
         enable = true
     }
     defaultConfig {
-        applicationId = "com.kingpower.dev"
         minSdk = 24
         targetSdk = 35
         versionCode = 1
