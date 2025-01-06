@@ -2,12 +2,19 @@ package com.kingpowerclick.auth0
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -18,11 +25,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.kingpowerclick.android.auth0.AuthenticationManager
 import com.kingpowerclick.android.auth0.CredentialsModel
 import com.kingpowerclick.auth0.ui.theme.Auth0Theme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
@@ -34,16 +45,24 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val scope = rememberCoroutineScope()
+            var accessToken by remember {
+                mutableStateOf("")
+            }
             var refreshToken by remember {
                 mutableStateOf("")
             }
             Auth0Theme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Column {
+                    Column(
+                        modifier = Modifier
+                            .verticalScroll(rememberScrollState())
+                    ) {
                         Greeting(
                             modifier = Modifier.padding(innerPadding),
                         )
                         Button(
+                            shape = RectangleShape,
+                            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                             onClick = {
                                 scope.launch {
                                     authenticationManager.logIn(
@@ -55,40 +74,47 @@ class MainActivity : ComponentActivity() {
                                             Log.d("asdf", "${result.refreshToken}")
                                             Log.d("asdf", "${result.expiresAt}")
                                             Log.d("asdf", "${result.scope}")
+                                            accessToken = result.accessToken!!
                                             refreshToken = result.refreshToken!!
                                         },
-                                        onFail = {},
+                                        onFail = {
+                                            Toast.makeText(this@MainActivity,"logIn Failed",Toast.LENGTH_SHORT).show()
+                                        },
                                     )
                                 }
                             },
                             content = {
                                 Text(
                                     text =
-                                        if (refreshToken.isBlank()) {
+                                        if (accessToken.isBlank()) {
                                             "Login"
                                         } else {
-                                            "Already Login refreshToken = $refreshToken"
+                                            "Already Login accessToken = $accessToken"
                                         },
                                 )
                             },
                         )
                         Button(
+                            shape = RectangleShape,
+                            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                             onClick = {
                                 scope.launch {
                                     authenticationManager.logOut(
                                         context = this@MainActivity,
                                         onSuccess = {
-                                            refreshToken = ""
+                                            accessToken = ""
                                             val a = 1
                                         },
-                                        onFail = {},
+                                        onFail = {
+                                            Toast.makeText(this@MainActivity,"logOut Failed",Toast.LENGTH_SHORT).show()
+                                        },
                                     )
                                 }
                             },
                             content = {
                                 Text(
                                     text =
-                                        if (refreshToken.isBlank()) {
+                                        if (accessToken.isBlank()) {
                                             "Already Logout"
                                         } else {
                                             "Logout"
@@ -97,28 +123,60 @@ class MainActivity : ComponentActivity() {
                             },
                         )
                         Button(
+                            shape = RectangleShape,
+                            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
                             onClick = {
                                 scope.launch {
                                     authenticationManager.refreshToken(
                                         refreshToken = refreshToken,
                                         onSuccess = { credentials: CredentialsModel ->
-
-                                            refreshToken = credentials.refreshToken!!
+                                            accessToken = credentials.accessToken!!
                                         },
-                                        onFail = {},
+                                        onFail = {
+                                            Toast.makeText(this@MainActivity,"refreshToken Failed",Toast.LENGTH_SHORT).show()
+                                        },
                                     )
                                 }
                             },
                             content = {
                                 Text(
                                     text =
-                                        if (refreshToken.isBlank()) {
+                                        if (accessToken.isBlank()) {
                                             "Login to enable refreshToken"
                                         } else {
-                                            "refreshToken = $refreshToken"
+                                            "accessToken = $accessToken"
                                         },
                                 )
                             },
+                            enabled = accessToken.isEmpty().not(),
+                        )
+                        Button(
+                            shape = RectangleShape,
+                            modifier = Modifier.fillMaxWidth().wrapContentHeight(),
+                            onClick = {
+                                CoroutineScope(Dispatchers.IO).launch {
+                                    val result =
+                                        authenticationManager.refreshTokenBySynchronous(
+                                            clientId =
+                                                authenticationManager
+                                                    .getClientId()
+                                                    .orEmpty(),
+                                            refreshToken = refreshToken,
+                                        )
+                                    accessToken = result?.accessToken.orEmpty()
+                                }
+                            },
+                            content = {
+                                Text(
+                                    text =
+                                        if (accessToken.isBlank()) {
+                                            "Login to enable refreshToken synchronous"
+                                        } else {
+                                            "accessToken = $accessToken"
+                                        },
+                                )
+                            },
+                            enabled = accessToken.isEmpty().not(),
                         )
                     }
                 }

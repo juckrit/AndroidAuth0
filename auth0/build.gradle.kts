@@ -70,4 +70,6 @@ afterEvaluate {
 
 dependencies {
     implementation(libs.auth0)
+    implementation(libs.retrofit)
+    implementation(libs.retrofitConverterGson)
 }

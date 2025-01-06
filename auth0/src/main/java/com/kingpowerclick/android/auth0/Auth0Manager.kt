@@ -7,6 +7,7 @@ import com.auth0.android.authentication.AuthenticationAPIClient
 import com.auth0.android.authentication.AuthenticationException
 import com.auth0.android.provider.CustomTabsOptions
 import com.auth0.android.provider.WebAuthProvider
+import java.util.Date
 
 class AuthenticationManager constructor(
     private val context: Context,
@@ -20,6 +21,8 @@ class AuthenticationManager constructor(
 
     private val account =
         Auth0.getInstance(clientId!!, domain!!)
+
+    fun getClientId() = clientId
 
     fun getMetadataValue(
         key: String,
@@ -129,6 +132,44 @@ class AuthenticationManager constructor(
                     statusCode = error.statusCode,
                 ),
             )
+        }
+    }
+
+    /*
+        not return new refreshToken
+        but return refreshToken that pass as param
+     */
+    fun refreshTokenBySynchronous(
+        clientId: String,
+        refreshToken: String,
+    ): CredentialsModel? {
+        val response =
+            RetrofitInstance
+                .getInstance()
+                .create(Auth0ApiInterface::class.java)
+                .refreshToken(
+                    RefreshTokenBody(
+                        client_id = clientId,
+                        refresh_token = refreshToken,
+                    ),
+                ).execute()
+        return if (response.isSuccessful) {
+            if (response.body() != null) {
+                val dateTimeAsLong: Long = response.body()!!.expiresIn
+                val date = Date(dateTimeAsLong)
+                CredentialsModel(
+                    idToken = response.body()!!.idToken,
+                    accessToken = response.body()!!.accessToken,
+                    refreshToken = refreshToken,
+                    type = response.body()!!.type,
+                    expiresAt = date,
+                    scope = response.body()!!.scope,
+                )
+            } else {
+                null
+            }
+        } else {
+            null
         }
     }
 }
