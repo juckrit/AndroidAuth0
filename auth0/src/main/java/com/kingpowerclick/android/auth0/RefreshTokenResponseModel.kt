@@ -1,17 +1,18 @@
 package com.kingpowerclick.android.auth0
 
 import com.google.gson.annotations.SerializedName
-import java.util.Date
 
 data class RefreshTokenResponseModel(
     @SerializedName("id_token")
-    val idToken :String,
+    val idToken: String,
     @SerializedName("access_token")
-    val accessToken :String,
+    val accessToken: String,
+    @SerializedName("refresh_token")
+    val refreshToken: String,
     @SerializedName("token_type")
-    val type :String,
+    val type: String,
     @SerializedName("expires_in")
-    val expiresIn : Long,
+    val expiresIn: Long,
     @SerializedName("scope")
-    val scope :String?,
+    val scope: String?,
 )

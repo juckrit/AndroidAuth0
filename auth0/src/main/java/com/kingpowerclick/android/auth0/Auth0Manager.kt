@@ -148,7 +148,7 @@ class AuthenticationManager constructor(
                 CredentialsModel(
                     idToken = response.body()!!.idToken,
                     accessToken = response.body()!!.accessToken,
-                    refreshToken = refreshToken,
+                    refreshToken = response.body()!!.refreshToken,
                     type = response.body()!!.type,
                     expiresAt = date,
                     scope = response.body()!!.scope,
