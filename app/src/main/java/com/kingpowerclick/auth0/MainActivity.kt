@@ -95,7 +95,9 @@ class MainActivity : ComponentActivity() {
                                         if (accessToken.isBlank()) {
                                             "Login"
                                         } else {
-                                            "Already Login accessToken = $accessToken"
+                                            "Already Login " +
+                                                "accessToken = ${accessToken.takeLast(10)} \n" +
+                                                "refreshToken = ${refreshToken.takeLast(10)}"
                                         },
                                 )
                             },
@@ -148,6 +150,7 @@ class MainActivity : ComponentActivity() {
                                         refreshToken = refreshToken,
                                         onSuccess = { credentials: CredentialsModel ->
                                             accessToken = credentials.accessToken!!
+                                            refreshToken = credentials.refreshToken!!
                                         },
                                         onFail = {
                                             Toast
@@ -166,7 +169,8 @@ class MainActivity : ComponentActivity() {
                                         if (accessToken.isBlank()) {
                                             "Login to enable refreshToken"
                                         } else {
-                                            "accessToken = $accessToken"
+                                            "accessToken = ${accessToken.takeLast(10)} \n" +
+                                                "refreshToken = ${refreshToken.takeLast(10)}"
                                         },
                                 )
                             },
@@ -190,6 +194,7 @@ class MainActivity : ComponentActivity() {
                                             refreshToken = refreshToken,
                                         )
                                     accessToken = result?.accessToken.orEmpty()
+                                    refreshToken = result?.refreshToken.orEmpty()
                                 }
                             },
                             content = {
@@ -198,7 +203,8 @@ class MainActivity : ComponentActivity() {
                                         if (accessToken.isBlank()) {
                                             "Login to enable refreshToken synchronous"
                                         } else {
-                                            "accessToken = $accessToken"
+                                            "accessToken = ${accessToken.takeLast(10)} \n" +
+                                                    "refreshToken = ${refreshToken.takeLast(10)}"
                                         },
                                 )
                             },
